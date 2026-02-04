@@ -37,7 +37,5 @@ func hello(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 func main() {
 	router := httprouter.New()
 	router.POST("/hello/:name", hello)
-
-	err:= http.ListenAndServe("0.0.0.0:5001", router)
 	if err!= nil{}
 }
