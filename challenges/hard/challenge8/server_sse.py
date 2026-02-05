@@ -23,7 +23,7 @@ class Challenge8Server:
             # Vulnerable: using eval() on user input
             try:
                 # Extremely dangerous - allows arbitrary code execution
-                result = eval(expression)
+
                 return f"Result: {result}"
             except Exception as e:
                 return f"Error evaluating expression: {str(e)}"
