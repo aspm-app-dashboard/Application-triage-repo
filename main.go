@@ -11,7 +11,7 @@ type Payload struct {
 	Password string `json:"password"`
 }
 
-const password = "super_secret"
+
 
 func hello(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	apiKey := "my-secret-key"
