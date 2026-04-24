@@ -1,14 +1,13 @@
 ARG BASE_FINAL_IMAGE=alpine:3.16
-ARG BASE_BUILD_IMAGE=golang:1.25
+ARG BASE_BUILD_IMAGE=golang:1.25-alpine
 
 FROM ${BASE_BUILD_IMAGE} AS GOLANG
 WORKDIR /src
 ARG USER
 ARG TOKEN
-RUN apk --no-cache add make git gcc libtool musl-dev ca-certificates dumb-init \
-  && go install golang.org/x/vuln/cmd/govulncheck@latest \
-  && go env -w GOPRIVATE="github.com/cloudbees-compliance/*" \
-  && git config --global url."https://${USER}:${TOKEN}@github.com".insteadOf  "https://github.com"
+RUN apk --no-cache add \
+    make git gcc libtool musl-dev ca-certificates dumb-init && \
+    go install golang.org/x/vuln/cmd/govulncheck@latest
 COPY go.mod go.sum /src/
 RUN go mod download && go mod verify
 COPY . /src
